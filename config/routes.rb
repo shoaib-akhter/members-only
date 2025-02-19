@@ -1,8 +1,18 @@
 Rails.application.routes.draw do
+  get "posts/new"
+  get "posts/create"
+  get "posts/index"
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  root to: "home#index"
+  # Devise authentication routes
+  devise_for :users
+
+  # Root page (temporary)
+  root to: "posts#index"
+ 
+  # Post routes (only new, create, and index actions)
+  resources :posts, only: [:new, :create, :index]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
