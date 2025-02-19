@@ -1,24 +1,18 @@
-# README
+# Members Only
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Rails project from The Odin Project. It implements authentication using Devise, allowing users to post messages while keeping the author's identity hidden from non-members.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- User authentication (signup, login, logout)
+- Ability to create and view posts
+- Author visibility limited to logged-in users
 
-* System dependencies
+## Setup
 
-* Configuration
+To run this project locally:
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Clone the repository
+2. Install dependencies: `bundle install`
+3. Run migrations: `rails db:migrate`
+4. Start the server: `rails server`
