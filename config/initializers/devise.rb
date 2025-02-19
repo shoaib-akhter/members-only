@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '9327401f25f5804a7f92ea1b46f07193b12b2567e7555606ae78b0cb11c3d985d07a9c6495e3786c8ccc23f5e2e99bf75097e64993c4aa53ca945e2f515bba6f'
+  config.secret_key = Rails.application.credentials.secret_key_base
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -277,10 +277,11 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  # config.warden do |manager|
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
-  # end
+  config.warden do |manager|
+    manager.default_strategies(scope: :user).unshift :database_authenticatable
+    manager.serialize_into_session(:user) { |user| [user.id] }
+    manager.serialize_from_session(:user) { |key| User.find_by(id: key) }
+  end  
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
