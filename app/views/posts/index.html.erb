@@ -1,2 +1,15 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<h1>All Posts</h1>
+
+<% @posts.each do |post| %>
+  <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+    <p><strong>Secret Message:</strong> <%= post.content %></p>
+    
+    <% if user_signed_in? %>
+      <p><strong>Author:</strong> <%= post.user.email %></p>
+    <% else %>
+      <p><strong>Author:</strong> <em>Hidden (Sign in to view)</em></p>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to "Create a New Post", new_post_path %>
